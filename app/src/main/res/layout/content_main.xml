@@ -9,7 +9,7 @@
     tools:showIn="@layout/app_bar_main">
 
     <ListView
-        android:id="@+id/listView_todoList"
+        android:id="@+id/listView_todo"
         android:layout_width="368dp"
         android:layout_height="495dp"
         tools:layout_editor_absoluteX="8dp"

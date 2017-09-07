@@ -2,8 +2,12 @@ package com.example.root.androidworkshop;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.Vector;
 
 /**
  * Created by root on 9/6/17.
@@ -54,7 +58,44 @@ public class SQLiteManager extends SQLiteOpenHelper {
     }
 
     public boolean updateStatus(int id){
-        //TODO: Update pending to done in database
-        return true;
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(T_COL4, 1);
+        int result = db.update(TABLE_NAME, contentValues, T_COL1 + " = ?", new String[]{String.valueOf(id)});
+        return !(result == 0);
+    }
+
+    public Pair<ArrayList<Integer>, Vector<ToDo>> getToDo(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "select * from " + TABLE_NAME
+                + " where " + T_COL4 + " = '0' "
+                + " order by " + T_COL3 + " ASC;"
+                , null);
+        ArrayList<Integer> id = new ArrayList<>();
+        Vector<ToDo> vec = new Vector<>();
+        while (cursor.moveToNext()) {
+            id.add(cursor.getInt(0));
+            vec.add(new ToDo(cursor.getString(1), new Date(cursor.getString(2))));
+        }
+        cursor.close();
+        db.close();
+        return new Pair<ArrayList<Integer>, Vector<ToDo>>(id, vec);
+    }
+
+    public Vector<ToDo> getDoneToDo(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(
+                "select * from " + TABLE_NAME
+                + " where " + T_COL4 + " = '1' "
+                + " order by " + T_COL3 + " ASC;"
+                , null);
+        Vector<ToDo> vec = new Vector<>();
+        while(cursor.moveToNext()){
+            vec.add(new ToDo(cursor.getString(1), new Date(cursor.getString(2))));
+        }
+        cursor.close();
+        db.close();
+        return vec;
     }
 }
