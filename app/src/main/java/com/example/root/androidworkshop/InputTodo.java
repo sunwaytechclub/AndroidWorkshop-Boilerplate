@@ -1,9 +1,8 @@
 package com.example.root.androidworkshop;
 
 import android.app.DatePickerDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -38,6 +37,7 @@ public class InputTodo extends AppCompatActivity {
         int day = cal.get(java.util.Calendar.DAY_OF_MONTH);
         editText_Date.setText(year + "-" + month + "-" + day);
 
+        //Event handler for when user click the editText_Date
         editText_Date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,6 +51,7 @@ public class InputTodo extends AppCompatActivity {
             }
         });
 
+        //Set the action when the user pick date from the calender shown up
         dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
@@ -60,20 +61,26 @@ public class InputTodo extends AppCompatActivity {
             }
         };
 
+        //Event handler for button_Add when click
         button_Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Instantiate SQLite database object
                 SQLiteManager db = new SQLiteManager(getApplicationContext());
 
+                //add object into SQLite database
                 boolean success = db.addToDo(new ToDo(
                         editText_Name.getText().toString(),
                         Date.displayStringToDate(editText_Date.getText().toString())
                 ));
                 if (success){
+                    //Toast is showing a message on screen that will gone within few second
                     Toast.makeText(getApplicationContext(), "Successfully Added",
                         Toast.LENGTH_LONG).show();
                 }
+                //update result for MainActivity
                 setResult(RESULT_OK, null);
+                //end current activity
                 finish();
             }
         });

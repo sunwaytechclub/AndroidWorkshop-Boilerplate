@@ -28,15 +28,18 @@ public class Date extends GregorianCalendar {
         return fields[1];
     }
 
+    //2017-9-18 to Object Date
     public static Date displayStringToDate(String date){
         String[] temp = date.split("-");
         return new Date(Integer.parseInt(temp[0]), Integer.parseInt(temp[1]), Integer.parseInt(temp[2]));
     }
 
+    //return in format of 2017-9-18
     public String displayDate(){
         return this.getYear() + "-" + this.getMonth() + "-" + this.getDate();
     }
 
+    //return in format of 20170918
     public String toString(){
         String date = String.valueOf(this.getYear());
         if (this.getMonth() < 10) {

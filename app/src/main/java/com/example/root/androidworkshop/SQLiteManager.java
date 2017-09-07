@@ -32,18 +32,21 @@ public class SQLiteManager extends SQLiteOpenHelper {
             + " text not null, " + T_COL4
             + " integer not null);";
 
+    //constructor
     public SQLiteManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    //for creating the table
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(TABLE_CREATE);
     }
 
+    //Can be ignore for now
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        //TODO: To be implement
+        //To be implement
     }
 
     public boolean addToDo(ToDo todo){
