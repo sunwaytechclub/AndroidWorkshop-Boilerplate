@@ -2,11 +2,12 @@ package com.example.root.androidworkshop;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Vector;
 
 public class DoneToDo extends AppCompatActivity {
 
@@ -23,19 +24,17 @@ public class DoneToDo extends AppCompatActivity {
         db = new SQLiteManager(getApplicationContext());
 
         //get the Done to do list from SQLite
-        Vector<ToDo> vec = db.getDoneToDo();
-        ToDo[] doneToDo = new ToDo[vec.size()];
+        ArrayList<ToDo> listArray = db.getDoneToDo();
 
-        //convert from vector to object array
-        int counter = 0;
-        Iterator i = vec.iterator();
-        while(i.hasNext()){
-            doneToDo[counter] = (ToDo) i.next();
-            counter++;
+
+        final String[] toDoArray = new String[listArray.size()];
+        for(int i=0;i<listArray.size();i++)
+        {
+            toDoArray[i]=listArray.get(i).getName();
         }
 
         //Set the listview to the done to do list
-        ListAdapter adapter = new ListViewFragment(this, doneToDo);
-        listView_DoneToDo.setAdapter(adapter);
+        ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,toDoArray);
+        listView_DoneToDo.setAdapter(listAdapter);
     }
 }

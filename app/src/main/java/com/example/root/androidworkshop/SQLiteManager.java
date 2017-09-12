@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
-import java.util.Vector;
 
 /**
  * Created by root on 9/6/17.
@@ -22,15 +21,13 @@ public class SQLiteManager extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "To_Do_List" ;
     private static final String T_COL1 = "id" ;
     private static final String T_COL2 = "name" ;
-    private static final String T_COL3 = "date" ;
-    private static final String T_COL4 = "done" ;
+    private static final String T_COL3 = "done" ;
 
-    private static final String TABLE_CREATE = "create table "
+    private static final String TABLE_CREATE = "CREATE TABLE "
             + TABLE_NAME + "( " + T_COL1
-            + " integer primary key autoincrement, " + T_COL2
-            + " text not null, " + T_COL3
-            + " text not null, " + T_COL4
-            + " integer not null);";
+            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + T_COL2
+            + " TEXT NOT NULL, " + T_COL3
+            + " INTEGER NOT NULL)" ;
 
     //constructor
     public SQLiteManager(Context context) {
@@ -53,8 +50,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(T_COL2, todo.getName());
-        contentValues.put(T_COL3, todo.getDate().toString());
-        contentValues.put(T_COL4, 0);
+        contentValues.put(T_COL3, 0);
         long result = db.insert(TABLE_NAME, null, contentValues);
         db.close();
         return !(result == -1);
@@ -63,42 +59,43 @@ public class SQLiteManager extends SQLiteOpenHelper {
     public boolean updateStatus(int id){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(T_COL4, 1);
+        contentValues.put(T_COL3, 1);
         int result = db.update(TABLE_NAME, contentValues, T_COL1 + " = ?", new String[]{String.valueOf(id)});
         return !(result == 0);
     }
 
-    public Pair<ArrayList<Integer>, Vector<ToDo>> getToDo(){
+    public Pair<ArrayList<Integer>, ArrayList<ToDo>> getToDo(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(
                 "select * from " + TABLE_NAME
-                + " where " + T_COL4 + " = '0' "
-                + " order by " + T_COL3 + " ASC;"
+                + " where " + T_COL3 + " = '0' "
                 , null);
         ArrayList<Integer> id = new ArrayList<>();
-        Vector<ToDo> vec = new Vector<>();
+        ArrayList<ToDo> toDoList = new ArrayList<ToDo>();
+        //Vector<ToDo> vec = new Vector<>();
         while (cursor.moveToNext()) {
             id.add(cursor.getInt(0));
-            vec.add(new ToDo(cursor.getString(1), new Date(cursor.getString(2))));
+            toDoList.add(new ToDo(cursor.getString(1)));
+            //vec.add(new ToDo(cursor.getString(1)));
         }
         cursor.close();
         db.close();
-        return new Pair<ArrayList<Integer>, Vector<ToDo>>(id, vec);
+        return new Pair<ArrayList<Integer>, ArrayList<ToDo>>(id, toDoList);
     }
 
-    public Vector<ToDo> getDoneToDo(){
+    public ArrayList<ToDo> getDoneToDo(){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(
                 "select * from " + TABLE_NAME
-                + " where " + T_COL4 + " = '1' "
-                + " order by " + T_COL3 + " ASC;"
+                + " where " + T_COL3 + " = '1' "
                 , null);
-        Vector<ToDo> vec = new Vector<>();
+        //Vector<ToDo> vec = new Vector<>();
+        ArrayList<ToDo> toDoList = new ArrayList<ToDo>();
         while(cursor.moveToNext()){
-            vec.add(new ToDo(cursor.getString(1), new Date(cursor.getString(2))));
+            toDoList.add(new ToDo(cursor.getString(1)));
         }
         cursor.close();
         db.close();
-        return vec;
+        return toDoList;
     }
 }
