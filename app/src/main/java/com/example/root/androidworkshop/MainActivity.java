@@ -27,11 +27,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activitiy_main);
-
-        //set toolbar toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_main);
 
         //link floating action button gui to object
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -84,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
                         //title of alert dialog
                         .setTitle(toDoArray[position])
                         //message of alert dialog
-                        .setMessage("Had you done " + toDoArray[position] + " ?")
+                        .setMessage("Have you done " + toDoArray[position] + " ?")
                         //positive button, the button at the position usually place for 'ok'
                         .setPositiveButton("Done",new DialogInterface.OnClickListener() {
                             @Override

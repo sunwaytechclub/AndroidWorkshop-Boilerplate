@@ -3,6 +3,7 @@ package com.example.root.androidworkshop;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -30,6 +31,14 @@ public class InputTodo extends AppCompatActivity {
                 //Instantiate SQLite database object
                 SQLiteManager db = new SQLiteManager(getApplicationContext());
 
+                //get back arrow to parent activity
+                getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+
+                //if its empty dont proceed
+                if(TextUtils.isEmpty(editText_Name.getText())){
+                    Toast.makeText(getApplicationContext(),"Please fill in the work to do",Toast.LENGTH_SHORT).show();
+                    return ;
+                }
                 //add object into SQLite database
                 boolean success = db.addToDo(new ToDo(editText_Name.getText().toString()));
                 if (success){

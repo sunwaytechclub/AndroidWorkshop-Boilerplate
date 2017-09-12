@@ -19,6 +19,9 @@ public class DoneToDo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_done_to_do);
 
+        //get back arrow to parent activity
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+
         //Link gui component to object
         listView_DoneToDo = (ListView)findViewById(R.id.listView_DoneToDo);
         db = new SQLiteManager(getApplicationContext());
