@@ -27,7 +27,7 @@ public class DoneToDo extends AppCompatActivity {
         db = new SQLiteManager(getApplicationContext());
 
         //get the Done to do list from SQLite
-        ArrayList<ToDo> listArray = db.getDoneToDo();
+        /*ArrayList<ToDo> listArray = db.getDoneToDo();
 
 
         final String[] toDoArray = new String[listArray.size()];
@@ -38,6 +38,6 @@ public class DoneToDo extends AppCompatActivity {
 
         //Set the listview to the done to do list
         ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,toDoArray);
-        listView_DoneToDo.setAdapter(listAdapter);
+        listView_DoneToDo.setAdapter(listAdapter);*/
     }
 }

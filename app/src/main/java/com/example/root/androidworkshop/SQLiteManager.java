@@ -72,30 +72,14 @@ public class SQLiteManager extends SQLiteOpenHelper {
                 , null);
         ArrayList<Integer> id = new ArrayList<>();
         ArrayList<ToDo> toDoList = new ArrayList<ToDo>();
-        //Vector<ToDo> vec = new Vector<>();
         while (cursor.moveToNext()) {
             id.add(cursor.getInt(0));
             toDoList.add(new ToDo(cursor.getString(1)));
-            //vec.add(new ToDo(cursor.getString(1)));
         }
         cursor.close();
         db.close();
         return new Pair<ArrayList<Integer>, ArrayList<ToDo>>(id, toDoList);
     }
 
-    public ArrayList<ToDo> getDoneToDo(){
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(
-                "select * from " + TABLE_NAME
-                + " where " + T_COL3 + " = '1' "
-                , null);
-        //Vector<ToDo> vec = new Vector<>();
-        ArrayList<ToDo> toDoList = new ArrayList<ToDo>();
-        while(cursor.moveToNext()){
-            toDoList.add(new ToDo(cursor.getString(1)));
-        }
-        cursor.close();
-        db.close();
-        return toDoList;
-    }
+    // TODO: Checkpoint
 }

@@ -45,7 +45,7 @@ public class InputTodo extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                 }
                 //update result for MainActivity
-                setResult(RESULT_OK, null);
+                //setResult(RESULT_OK, null);
                 //end current activity
                 finish();
             }

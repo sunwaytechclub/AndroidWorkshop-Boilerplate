@@ -35,9 +35,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivityForResult(new Intent(
-                        MainActivity.this, InputTodo.class
-                ), 1);
+                // TODO: Checkpoint
+                startActivity(new Intent(MainActivity.this, InputTodo.class));
             }
         });
 
@@ -49,8 +48,7 @@ public class MainActivity extends AppCompatActivity {
         button_tasksCompleted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this,DoneToDo.class);
-                startActivity(intent);
+                startActivity(new Intent(MainActivity.this, DoneToDo.class));
             }
         });
 
@@ -107,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Code that must be added for startActivityForResult
-    @Override
+/*    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
@@ -115,5 +113,5 @@ public class MainActivity extends AppCompatActivity {
             startActivity(refresh);
             this.finish();
         }
-    }
+    }*/
 }
