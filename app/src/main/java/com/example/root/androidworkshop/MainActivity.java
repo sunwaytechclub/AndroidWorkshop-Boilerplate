@@ -83,11 +83,6 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton("Done",new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                boolean success = db.updateStatus(ids.get(position).intValue());
-                                if(success){
-                                    Toast.makeText(getApplicationContext(), "Successfully updated",
-                                            Toast.LENGTH_LONG).show();
-                                }
                                 finish();
                                 startActivity(getIntent());
                             }

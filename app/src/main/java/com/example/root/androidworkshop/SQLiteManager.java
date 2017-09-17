@@ -37,7 +37,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
     //for creating the table
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TABLE_CREATE);
+
     }
 
     //Can be ignore for now
@@ -47,21 +47,7 @@ public class SQLiteManager extends SQLiteOpenHelper {
     }
 
     public boolean addToDo(ToDo todo){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(T_COL2, todo.getName());
-        contentValues.put(T_COL3, 0);
-        long result = db.insert(TABLE_NAME, null, contentValues);
-        db.close();
-        return !(result == -1);
-    }
-
-    public boolean updateStatus(int id){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(T_COL3, 1);
-        int result = db.update(TABLE_NAME, contentValues, T_COL1 + " = ?", new String[]{String.valueOf(id)});
-        return !(result == 0);
+        return true;
     }
 
     public Pair<ArrayList<Integer>, ArrayList<ToDo>> getToDo(){
