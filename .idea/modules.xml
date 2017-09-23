@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AndroidWorkshop.iml" filepath="$PROJECT_DIR$/AndroidWorkshop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidWorkshop-Boilerplate.iml" filepath="$PROJECT_DIR$/AndroidWorkshop-Boilerplate.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

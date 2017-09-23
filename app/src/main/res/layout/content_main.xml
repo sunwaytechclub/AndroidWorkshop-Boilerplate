@@ -6,23 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.root.androidworkshop.MainActivity"
-    >
+    tools:context="com.example.root.androidworkshop.MainActivity">
 
-    <ListView
-        android:id="@+id/listView_todo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp" />
-
-    <Button
-        android:id="@+id/button_completedTasks"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="30px"
-        style="?android:attr/borderlessButtonStyle"
-        android:text="@string/done_list"/>
 
 </LinearLayout>
